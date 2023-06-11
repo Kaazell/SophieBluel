@@ -26,13 +26,11 @@ function generateButtons(textContent, className, onClick) {
     filters.append(button)
 }
 
-
 function onClick(filter) {
     let filtered = filter;
     document.querySelector(".gallery").remove();
     displayGallery(filtered);
 }
-
 
 let filters;
 function generateFilters() {
@@ -75,11 +73,9 @@ async function getJson(){
         displayGallery(data);
     }
 }
+
 getJson()
 getCategories()
-
-
-// modal.js
 
 // Edit mode
 const token = sessionStorage.getItem("token");
@@ -92,3 +88,81 @@ function connected() {
     logButton.innerHTML = '<a style="color: black; text-decoration: none;" href="login.html">logout</a>'
     }
 }
+
+connected()
+
+// Modal
+
+let modal = null
+
+const openModal = function (e) {
+    e.preventDefault()
+
+    const target = document.querySelector(e.target.getAttribute('href'))
+    target.style.display = null;
+    target.removeAttribute('aria-hidden');
+    target.setAttribute('aria-modal', 'true');
+    modal = target
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+}
+
+const closeModal = function (e) {
+    if (modal === null) return
+    e.preventDefault()
+    const target = document.querySelector(e.target.getAttribute('href'))
+    modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.removeAttribute('aria-modal');
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-close').removeEventListener( 'click', closeModal)
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
+    modal = null
+}
+
+const stopPropagation = function(e) {
+    e.stopPropagation()
+}
+
+document.querySelectorAll(".js-modal").forEach(a => {
+    a.addEventListener('click', openModal)
+})
+
+window.addEventListener('keydown', function(e) {
+    if(e.key === "Escape" || e.key ==="Esc"){
+    closeModal(e)
+    }
+})
+
+function displayGalleryModal(d){
+    const modalDisp = document.querySelector('.modal-wrapper')
+    const gallery = document.createElement('div');
+    modalDisp.append(gallery)
+    gallery.className = "modmod"    
+    for(let i = 0; i < d.length; i++){
+        let figure = document.createElement('figure');
+        let img = document.createElement('img');
+        let figCaption = document.createElement('figcaption');
+
+        img.src = d[i].imageUrl;
+        figCaption.innerText = d[i].title;
+
+        gallery.append(figure);
+        figure.append(img);
+        figure.append(figCaption);
+    }
+}
+
+async function getJsonModal(){
+    const requestWorks = await fetch(url + "/works",{
+        method: 'GET'
+    })
+    if(!requestWorks.ok){
+        alert('Une erreur est survenue.')
+    } else {
+        dataModal = await requestWorks.json();
+        displayGalleryModal(dataModal);
+    }
+}
+getJsonModal()

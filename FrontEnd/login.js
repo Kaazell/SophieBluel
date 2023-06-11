@@ -1,17 +1,14 @@
 const form = document.querySelector("#login-form");
 const urlLogin = "http://localhost:5678/api/users/login"
 
-
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
-
 
     // Récupération des champs du formulaire nécessaire pour l requête API
     let adminInfo = {
         email : form.elements.email.value,
         password: form.elements.password.value
     };
-
 
     // Requête POST asynchrone à l'API swagger avec les informations nécessaires pour l'identification
     const reponse = await fetch(urlLogin, {
@@ -21,7 +18,6 @@ form.addEventListener("submit", async (event) => {
         },
         body : JSON.stringify(adminInfo)
     });
-
 
     // Ce qu'il se passe si le statue de la requete API est du statut 200: d'abord récuperer les données recues sur l'api au format JSON
     if (reponse.ok) {
