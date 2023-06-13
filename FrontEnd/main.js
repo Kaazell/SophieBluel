@@ -139,18 +139,21 @@ function displayGalleryModal(d){
     const modalDisp = document.querySelector('.modal-wrapper')
     const gallery = document.createElement('div');
     modalDisp.append(gallery)
-    gallery.className = "modmod"    
+    gallery.className = "works-modal"    
     for(let i = 0; i < d.length; i++){
         let figure = document.createElement('figure');
         let img = document.createElement('img');
+        let crossImg = document.createElement('i');
         let figCaption = document.createElement('figcaption');
 
+        crossImg.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
         img.src = d[i].imageUrl;
         figCaption.innerText = d[i].title;
 
         gallery.append(figure);
+        figure.append(crossImg)
         figure.append(img);
-        figure.append(figCaption);
+        figure.append("éditer");
     }
 }
 
