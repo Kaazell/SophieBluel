@@ -246,25 +246,45 @@ margin: auto;
 }
 /* Edit banner */
 #edit {
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	background-color: black;
-	height: 60px;
+	width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    height: 60px;
+    margin-left: calc(-1 * ((100vw - 100%) / 2));
 }
 #edit > ul {
-	width: 30%;
+	width: 28%;
 	display: flex;
 	justify-content: space-between;
 }
 .editLi {
 	color: white;
 }
+.editLi>a {
+	color: white;
+	text-decoration: none;
+}
+.editLi>i {
+	color: white;
+}
 .editLi:hover {
-	scale: 1.1;
 	cursor: pointer;
+	color: white;
+}
+#publishChanges{
+	background-color: white;
+	color: black;
+	width: auto;
+	border: 0.15em white solid;
+	padding: 9px 17px;
+	border-radius: 25px;
+	font-weight: bold;
+}
+#editMode {
+	padding: 9px 17px;
 }
 /* Modal */
 .modal {
@@ -372,4 +392,5 @@ hr {
 }
 #gallery-edit-buttons>button{
 	margin: 10px;
+	cursor: pointer;
 }

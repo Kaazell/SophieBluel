@@ -179,4 +179,16 @@ const openModal = function (e) {
   
   getJsonModal();
 
-  
+//   Delete
+
+async function deleteWork(){
+    const requestWorks = await fetch(url + "/delete",{
+        method: 'DELETE'
+    })
+    if(!requestWorks.ok){
+        alert('Une erreur est survenue.')
+    } else {
+        data = await requestWorks.json();
+        displayGallery(data);
+    }
+}
