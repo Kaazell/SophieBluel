@@ -181,6 +181,8 @@ const openModal = function (e) {
 
 //   Delete
 
+
+
 async function deleteWork(){
     const requestWorks = await fetch(url + "/delete",{
         method: 'DELETE'
@@ -192,3 +194,4 @@ async function deleteWork(){
         displayGallery(data);
     }
 }
+
